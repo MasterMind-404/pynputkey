@@ -11,4 +11,4 @@ try:
     while True:
         time.sleep(1)
 except KeyboardInterrupt:
-    print("\nSee you later!")
+    print("\nLove You 3000, SHADY!")
